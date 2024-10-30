@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="film-service" />
+        <module name="ticket-api" />
+        <module name="ticket-gateway" />
+        <module name="pay-service" />
+        <module name="sessions-service" />
+        <module name="trade-service" />
+        <module name="user-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ticket-common" target="17" />
+      <module name="ticket-redis" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="film-service" options="-parameters" />
+      <module name="pay-service" options="-parameters" />
+      <module name="sessions-service" options="-parameters" />
+      <module name="ticket-api" options="-parameters" />
+      <module name="ticket-common" options="-parameters" />
+      <module name="ticket-gateway" options="-parameters" />
+      <module name="ticket-redis" options="-parameters" />
+      <module name="ticketManage" options="-parameters" />
+      <module name="trade-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

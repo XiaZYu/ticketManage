@@ -1,0 +1,4 @@
+E:\ticketManage\ticket-gateway\src\main\java\com\example\gateway\config\AuthJwtProperties.java
+E:\ticketManage\ticket-gateway\src\main\java\com\example\gateway\GatewayApplication.java
+E:\ticketManage\ticket-gateway\src\main\java\com\example\gateway\fiter\AuthGlobalFilter.java
+E:\ticketManage\ticket-gateway\src\main\java\com\example\gateway\utils\JwtUtils.java
