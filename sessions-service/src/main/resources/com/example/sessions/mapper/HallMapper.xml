@@ -14,6 +14,6 @@
                 hall_desc like concat('%', #{hallDesc}, '%')
             </if>
         </where>
-        limit #{pageNumber}, #{pageSize}
+        limit #{current}, #{pageSize}
     </select>
 </mapper>

@@ -22,6 +22,6 @@
             </if>
         </where>
         order by s.time
-        limit #{pageNumber}, #{pageSize}
+        limit #{current}, #{pageSize}
     </select>
 </mapper>

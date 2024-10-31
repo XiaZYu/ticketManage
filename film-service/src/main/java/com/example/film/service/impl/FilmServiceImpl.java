@@ -32,9 +32,9 @@ public class FilmServiceImpl implements FilmService {
 
 
     @Override
-    public List<Film> getFilmList(String filmName, String filmType, int pageNumber, int pageSize) {
-        int size = (pageNumber - 1) * pageSize;
-        return filmMapper.getFilmList(filmName, filmType, size, pageSize);
+    public List<Film> getFilmList(String filmName, String filmType, int current, int pageSize) {
+        current = (current - 1) * pageSize;
+        return filmMapper.getFilmList(filmName, filmType, current, pageSize);
     }
 
     @Override

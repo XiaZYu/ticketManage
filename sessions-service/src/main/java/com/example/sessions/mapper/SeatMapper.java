@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface SeatMapper {
 
-    @Select("SELECT * FROM seat WHERE hall_id = #{hallId} ORDER BY s_row, s_column LIMIT #{size}, #{pageSize}")
-    List<Seat> getSeats(String hallId, int size, int pageSize);
+    @Select("SELECT * FROM seat WHERE hall_id = #{hallId} ORDER BY s_row, s_column LIMIT #{current}, #{pageSize}")
+    List<Seat> getSeats(String hallId, int current, int pageSize);
 
     @Update("UPDATE seat SET attr = #{attr}, status = #{status} WHERE seat_id = #{seatId}")
     int updateSeat(Seat seat);

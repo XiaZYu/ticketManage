@@ -41,7 +41,7 @@
                 t.hall_Id = #{hallId}
             </if>
         </where>
-        limit #{pageNumber}, #{pageSize}
+        limit #{current}, #{pageSize}
     </select>
     <select id="getMyTradeList" resultMap="getTradeList">
         SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, s.seat_id, s.s_row , s.s_column, s.attr, u.uid, u.name, u.phone
@@ -51,6 +51,6 @@
         LEFT JOIN seat s ON t.seat = s.seat_id
         LEFT JOIN user u ON t.uid = u.uid
         WHERE t.uid = #{uid}
-        limit #{pageNumber}, #{pageSize}
+        limit #{current}, #{pageSize}
     </select>
 </mapper>

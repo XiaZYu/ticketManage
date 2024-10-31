@@ -27,9 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUser(Long phone, String nickname, String name, int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return userMapper.findUser(phone, nickname, name, size, pageSize);
+    public List<User> findUser(Long phone, String nickname, String name, int current, int pageSize) {
+        current =( current - 1) * pageSize;
+        return userMapper.findUser(phone, nickname, name, current, pageSize);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserList(int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return userMapper.getUserList(size, pageSize);
+    public List<User> getUserList(int current, int pageSize) {
+        current =( current - 1) * pageSize;
+        return userMapper.getUserList(current, pageSize);
     }
 
     @Override

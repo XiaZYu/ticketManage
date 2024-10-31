@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 @Tag(name = "场次相关接口")
 @RestController
@@ -26,7 +25,7 @@ import java.util.regex.Pattern;
 public class SessionController {
     private final SessionService sessionService;
 
-    private final FilmClient filmClient;
+    private FilmClient filmClient;
 
     private final HallService hallService;
 
@@ -37,7 +36,6 @@ public class SessionController {
             @RequestParam(required = false, defaultValue = "1") int current,
             @RequestParam(required = false, defaultValue = "10") int pageSize
     ) {
-        String filmId = "";
         SessionsList sessionsList = new SessionsList();
         List<SessionDetail> sessions = new ArrayList<>();
 
@@ -50,7 +48,7 @@ public class SessionController {
                 sessions.addAll(sessionService.getSessionsByFilmId(film.getFilmId(), current, pageSize));
             }
         }
-        sessions.addAll(sessionService.getSessionsByFilmId(filmId, current, pageSize));
+        sessions.addAll(sessionService.getSessionsByFilmId(null, current, pageSize));
         sessionsList.setCount(sessionService.Count());
         sessionsList.setList(sessions);
         sessionsList.setSize(pageSize);
@@ -111,5 +109,26 @@ public class SessionController {
             return Result.success("修改成功");
         }
         return Result.error("修改失败");
+    }
+
+    @Operation(summary = "通过电影Id获取场次")
+    @GetMapping("/getFilmSessions")
+    public Result<SessionsList> getFilmSessions(
+            @RequestParam(required = false) String filmId,
+            @RequestParam(required = false, defaultValue = "1") int current,
+            @RequestParam(required = false, defaultValue = "10") int pageSize
+    ) {
+
+        SessionsList sessionsList = new SessionsList();
+        List<SessionDetail> sessions = new ArrayList<>();
+
+        sessions.addAll(sessionService.getSessionsByFilmId(filmId, current, pageSize));
+
+        sessionsList.setCount(sessionService.Count());
+        sessionsList.setList(sessions);
+        sessionsList.setSize(pageSize);
+        sessionsList.setPage(current);
+
+        return Result.success(sessionsList);
     }
 }

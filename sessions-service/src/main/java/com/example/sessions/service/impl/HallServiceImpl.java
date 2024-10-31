@@ -19,9 +19,9 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public List<Hall> queryHalls(String hallName, String hallDesc,int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return hallMapper.queryHalls(hallName, hallDesc,size, pageSize);
+    public List<Hall> queryHalls(String hallName, String hallDesc,int current, int pageSize) {
+        current =( current - 1) * pageSize;
+        return hallMapper.queryHalls(hallName, hallDesc,current, pageSize);
     }
 
     @Override

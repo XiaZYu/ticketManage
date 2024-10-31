@@ -8,7 +8,7 @@ public interface SeatService {
 
     int getSeatCount();
 
-    List<Seat> getAvailableSeats(String hallId, int pageNumber, int pageSize);
+    List<Seat> getAvailableSeats(String hallId, int current, int pageSize);
 
     Seat getSeatById(String seatId);
 

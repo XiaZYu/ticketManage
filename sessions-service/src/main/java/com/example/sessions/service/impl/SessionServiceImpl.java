@@ -15,9 +15,9 @@ public class SessionServiceImpl implements SessionService {
     private final SessionMapper sessionMapper;
 
     @Override
-    public List<SessionDetail> getSessionsByFilmId(String filmId, int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return sessionMapper.getSessionsByFilmId(filmId, size, pageSize);
+    public List<SessionDetail> getSessionsByFilmId(String filmId, int current, int pageSize) {
+         current = ( current - 1) * pageSize;
+        return sessionMapper.getSessionsByFilmId(filmId, current, pageSize);
     }
 
     @Override

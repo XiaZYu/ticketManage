@@ -13,13 +13,13 @@ import java.util.List;
 public interface UserMapper {
 
     //根据用户昵称查询用户信息
-    List<User> findUser(Long phone, String nickname, String name, int pageNumber, int pageSize);
+    List<User> findUser(Long phone, String nickname, String name, int current, int pageSize);
 
     //分页查询
     @Select("SELECT uid, nickname, name, gender, age," +
             " phone, email, role FROM user " +
-            "limit #{pageNumber}, #{pageSize}")
-    List<User> getUserList(int pageNumber, int pageSize);
+            "limit #{current}, #{pageSize}")
+    List<User> getUserList(int current, int pageSize);
 
     //注册
     @Insert("INSERT INTO user(uid,nickname, name, password, gender, age, email, phone) " +

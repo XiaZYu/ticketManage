@@ -19,9 +19,9 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<Seat> getAvailableSeats(String hallId, int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return seatMapper.getSeats(hallId, size, pageSize);
+    public List<Seat> getAvailableSeats(String hallId, int current, int pageSize) {
+        current =( current - 1) * pageSize;
+        return seatMapper.getSeats(hallId, current, pageSize);
     }
 
     @Override

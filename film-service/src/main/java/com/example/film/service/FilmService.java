@@ -11,7 +11,7 @@ public interface FilmService {
 
     int addFilm(Film film);
 
-    List<Film> getFilmList(String filmName, String filmType, int pageNumber, int pageSize);
+    List<Film> getFilmList(String filmName, String filmType, int current, int pageSize);
 
     int updateFilm(Film film);
 

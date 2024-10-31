@@ -26,9 +26,9 @@ public class TradeServiceImpl implements TradeService {
     }
 
     @Override
-    public List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int pageNumber, int pageSize) {
-        int size =( pageNumber - 1) * pageSize;
-        return tradeMapper.getTradeList(uid, filmId, hallId, size, pageSize);
+    public List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int current, int pageSize) {
+        current =( current - 1) * pageSize;
+        return tradeMapper.getTradeList(uid, filmId, hallId, current, pageSize);
     }
 
     @Override

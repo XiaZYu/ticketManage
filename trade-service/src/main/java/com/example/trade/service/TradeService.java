@@ -11,7 +11,7 @@ public interface TradeService {
 
     int addTrade(Trade trade);
 
-    List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int pageNumber, int pageSize);
+    List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int current, int pageSize);
 
     int countTrade();
 

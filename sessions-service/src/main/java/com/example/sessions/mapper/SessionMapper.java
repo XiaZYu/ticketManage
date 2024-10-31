@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface SessionMapper {
-    List<SessionDetail> getSessionsByFilmId(String filmId, int pageNumber, int pageSize);
+    List<SessionDetail> getSessionsByFilmId(String filmId, int current, int pageSize);
 
     @Select("select count(*) from session")
     Integer Count();

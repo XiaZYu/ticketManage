@@ -14,6 +14,7 @@ import com.example.trade.service.TradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,11 +32,10 @@ public class TradeController {
 
     private final TradeService tradeService;
 
-    private final UserClient userClient;
+    public   UserClient userClient;
 
-    private final SessionClient sessionClient;
 
-    private final FilmClient filmClient;
+    public   FilmClient filmClient;
 
 
     @Operation(summary = "创建交易")
@@ -78,6 +78,7 @@ public class TradeController {
         List<TradeDetail> tradeDetailList = new ArrayList<>();
         List<Film> films;
         String uid = null;
+        String filmId = null;
         if (name != null && !name.isEmpty()){
             System.out.println(userClient.getUserByName(name));
             uid = getInfo(userClient.getUserByName(name).getData().toString(),"uid=(.*?),");
@@ -97,7 +98,7 @@ public class TradeController {
             }
         }
         if (tradeDetailList.isEmpty()){
-            tradeDetailList.addAll(tradeService.getTradeList(uid, null, hallId, current, pageSize));
+            tradeDetailList.addAll(tradeService.getTradeList(uid, filmId, hallId, current, pageSize));
         }
         tradeList.setSize(pageSize);
         tradeList.setPage(current);
@@ -143,5 +144,6 @@ public class TradeController {
         }
         return null;
     }
+
 }
 

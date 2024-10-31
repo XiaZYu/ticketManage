@@ -2,7 +2,10 @@ package com.example.trade.mapper;
 
 import com.example.trade.domain.po.Trade;
 import com.example.trade.domain.vo.TradeDetail;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ public interface TradeMapper {
             " VALUES(#{tradeId}, #{filmId}, #{sessionId}, #{hallId}, #{seat}, #{uid}, #{phone}, #{price}, NOW(), #{status})")
     int addTrade(Trade trade);
 
-    List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int pageNumber, int pageSize);
+    List<TradeDetail> getTradeList(String uid, String filmId, String hallId, int current, int pageSize);
 
     @Select("SELECT COUNT(*) FROM trade")
     int countTrade();

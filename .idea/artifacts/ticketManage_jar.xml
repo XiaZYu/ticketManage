@@ -5,7 +5,7 @@
       <element id="module-output" name="pay-service" />
       <element id="module-output" name="film-service" />
       <element id="module-output" name="user-service" />
-      <element id="module-output" name="ticket-api" />
+      <element id="module-output" name="ticket-api-local" />
       <element id="module-output" name="trade-service" />
       <element id="module-output" name="ticket-gateway" />
       <element id="module-output" name="sessions-service" />

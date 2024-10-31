@@ -5,7 +5,7 @@ import com.example.sessions.domain.vo.SessionDetail;
 import java.util.List;
 
 public interface SessionService {
-    List<SessionDetail> getSessionsByFilmId(String filmId, int pageNumber, int pageSize);
+    List<SessionDetail> getSessionsByFilmId(String filmId, int current, int pageSize);
 
     Integer Count();
 

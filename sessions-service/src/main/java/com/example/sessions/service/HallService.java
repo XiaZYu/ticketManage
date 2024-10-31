@@ -8,7 +8,7 @@ public interface HallService {
 
     int getHallsCount();
 
-    List<Hall> queryHalls(String hallName, String hallDesc,int pageNumber,int pageSize);
+    List<Hall> queryHalls(String hallName, String hallDesc,int current,int pageSize);
 
     Hall getHallById(String hallId);
 

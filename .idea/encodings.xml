@@ -6,7 +6,7 @@
     <file url="file://$PROJECT_DIR$/sessions-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ticket-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket-api-local/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-redis/src/main/java" charset="UTF-8" />
