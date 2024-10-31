@@ -22,11 +22,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <!-- load balancer-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <!-- swagger 注解依赖 -->
         <dependency>

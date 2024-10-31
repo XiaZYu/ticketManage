@@ -2,10 +2,7 @@ package com.example.user.mapper;
 
 import com.example.api.po.Result;
 import com.example.user.domain.po.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,7 +10,7 @@ import java.util.List;
 public interface UserMapper {
 
     //根据用户昵称查询用户信息
-    List<User> findUser(Long phone, String nickname, String name, int current, int pageSize);
+    List<User> findUser(@Param("phone") Long phone, @Param("nickname")String nickname, @Param("name")String name, @Param("current")int current, @Param("pageSize")int pageSize);
 
     //分页查询
     @Select("SELECT uid, nickname, name, gender, age," +

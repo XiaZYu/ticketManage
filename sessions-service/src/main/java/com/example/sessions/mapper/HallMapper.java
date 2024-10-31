@@ -11,7 +11,7 @@ public interface HallMapper {
     @Select("SELECT COUNT(*) FROM hall")
     int getHallsCount();
 
-    List<Hall> queryHalls(String hallName, String hallDesc, int current, int pageSize);
+    List<Hall> queryHalls(@Param("hallName") String hallName, @Param("hallDesc") String hallDesc, @Param("current") int current, @Param("pageSize") int pageSize);
 
     @Select("SELECT * from hall WHERE hall_id = #{hallId}")
     Hall getHallById(String hallId);

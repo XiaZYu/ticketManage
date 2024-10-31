@@ -1,10 +1,7 @@
 package com.example.sessions.mapper;
 
 import com.example.sessions.domain.po.Seat;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -12,7 +9,7 @@ import java.util.List;
 public interface SeatMapper {
 
     @Select("SELECT * FROM seat WHERE hall_id = #{hallId} ORDER BY s_row, s_column LIMIT #{current}, #{pageSize}")
-    List<Seat> getSeats(String hallId, int current, int pageSize);
+    List<Seat> getSeats(@Param("hallId") String hallId, @Param("current") int current, @Param("pageSize") int pageSize);
 
     @Update("UPDATE seat SET attr = #{attr}, status = #{status} WHERE seat_id = #{seatId}")
     int updateSeat(Seat seat);

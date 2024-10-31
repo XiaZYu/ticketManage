@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +35,11 @@ public class UserController {
     @Operation(summary = "查询用户信息")
     @GetMapping("/list")
     public Result<UserList> getUserList(
-            @RequestParam(required = false) Long phone,
-            @RequestParam(required = false) String nickname,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false, defaultValue = "1") int current,
-            @RequestParam(required = false, defaultValue = "10") int pageSize) {
+            @RequestParam(required = false)@Param("phone") Long phone,
+            @RequestParam(required = false)@Param("nickname") String nickname,
+            @RequestParam(required = false)@Param("name") String name,
+            @RequestParam(required = false, defaultValue = "1")@Param("current") int current,
+            @RequestParam(required = false, defaultValue = "10")@Param("pageSize") int pageSize) {
         UserList userList = new UserList();
         List<User> user;
         userList.setSize(pageSize);

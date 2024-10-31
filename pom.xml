@@ -15,6 +15,7 @@
         <module>trade-service</module>
         <module>sessions-service</module>
         <module>ticket-gateway</module>
+<!--        <module>ticket-api-local</module>-->
     </modules>
 
     <parent>

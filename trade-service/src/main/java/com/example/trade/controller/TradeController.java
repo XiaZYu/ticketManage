@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,10 +33,11 @@ public class TradeController {
 
     private final TradeService tradeService;
 
-    public   UserClient userClient;
+    @Autowired
+    private  UserClient userClient;
 
-
-    public   FilmClient filmClient;
+    @Autowired
+    private  FilmClient filmClient;
 
 
     @Operation(summary = "创建交易")

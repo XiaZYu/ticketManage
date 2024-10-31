@@ -2288,3 +2288,36 @@ java.lang.NullPointerException: Cannot invoke "com.example.api.client.FilmClient
 11:53:36:427 DEBUG 24820 --- [http-nio-8083-exec-3] c.e.sessions.mapper.SessionMapper.Count  : ==>  Preparing: select count(*) from session
 11:53:36:427 DEBUG 24820 --- [http-nio-8083-exec-3] c.e.sessions.mapper.SessionMapper.Count  : ==> Parameters: 
 11:53:36:430 DEBUG 24820 --- [http-nio-8083-exec-3] c.e.sessions.mapper.SessionMapper.Count  : <==      Total: 1
+13:16:43:828  WARN 24820 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
+13:16:43:828  WARN 24820 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
+13:16:43:832  WARN 24820 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Destruction of the end
+13:16:43:834  WARN 24820 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Destruction of the end
+13:16:43:905  INFO 24820 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registering from Nacos Server now...
+13:16:43:905  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : [DEREGISTER-SERVICE] ticket deregistering service sessions-service with instance: Instance{instanceId='null', ip='192.168.162.1', port=8083, weight=1.0, healthy=true, enabled=true, ephemeral=true, clusterName='DEFAULT', serviceName='null', metadata={}}
+13:16:43:911  INFO 24820 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registration finished.
+13:16:43:911  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown begin
+13:16:43:911  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown begin
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown stop
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown stop
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown begin
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown begin
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown stop
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.core.ServerListManager do shutdown begin
+13:16:43:912  WARN 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : [NamingHttpClientManager] Start destroying NacosRestTemplate
+13:16:43:912  WARN 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : [NamingHttpClientManager] Destruction of the end
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.core.ServerListManager do shutdown stop
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown begin
+13:16:43:912  WARN 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : [NamingHttpClientManager] Start destroying NacosRestTemplate
+13:16:43:912  WARN 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : [NamingHttpClientManager] Destruction of the end
+13:16:43:912  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown stop
+13:16:43:913  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown rpc client, set status to shutdown
+13:16:43:913  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@160546b1[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+13:16:43:913  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Close current connection 1730346688327_127.0.0.1_54776
+13:16:43:915  INFO 24820 --- [nacos-grpc-client-executor-127.0.0.1-1047] c.a.n.c.remote.client.grpc.GrpcClient    : [1730346688327_127.0.0.1_54776]Ignore complete event,isRunning:false,isAbandon=false
+13:16:43:922  INFO 24820 --- [SpringApplicationShutdownHook] c.a.n.c.remote.client.grpc.GrpcClient    : Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@2fea9a7b[Running, pool size = 4, active threads = 0, queued tasks = 0, completed tasks = 1048]
+13:16:43:923  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : Shutdown grpc redo service executor java.util.concurrent.ScheduledThreadPoolExecutor@7b2d58e6[Running, pool size = 1, active threads = 0, queued tasks = 1, completed tasks = 1701]
+13:16:43:923  INFO 24820 --- [SpringApplicationShutdownHook] c.a.n.c.a.r.identify.CredentialWatcher   : [null] CredentialWatcher is stopped
+13:16:43:924  INFO 24820 --- [SpringApplicationShutdownHook] c.a.n.c.a.r.identify.CredentialService   : [null] CredentialService is freed
+13:16:43:924  INFO 24820 --- [SpringApplicationShutdownHook] com.alibaba.nacos.client.naming          : com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown stop
+13:16:43:926  INFO 24820 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+13:16:43:935  INFO 24820 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

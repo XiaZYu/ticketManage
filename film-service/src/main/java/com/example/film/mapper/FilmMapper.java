@@ -14,7 +14,7 @@ public interface FilmMapper {
             "synopsis = #{synopsis}, price = #{price}, posters = #{posters}, box_office = #{boxOffice} WHERE film_id = #{filmId}")
     int updateFilm(Film film);
 
-    List<Film> getFilmList(String filmName, String filmType, int current, int pageSize);
+    List<Film> getFilmList(@Param("filmName") String filmName, @Param("filmType") String filmType, @Param("current") int current, @Param("pageSize") int pageSize);
 
     @Delete("DELETE FROM film WHERE film_id = #{filmId}")
     void deleteById(String filmId);
