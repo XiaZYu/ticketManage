@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Component
-@FeignClient(name = "film-service")
+@FeignClient("film-service")
 public interface FilmClient {
 
     @GetMapping("/api/films/findById?filmId={filmId}")

@@ -1,8 +1,5 @@
 package com.example.trade.controller;
 
-
-
-import com.example.api.client.SessionClient;
 import com.example.api.client.UserClient;
 import com.example.api.client.FilmClient;
 import com.example.api.po.Film;
@@ -14,7 +11,7 @@ import com.example.trade.service.TradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,10 +31,11 @@ public class TradeController {
     private final TradeService tradeService;
 
     @Autowired
-    private  UserClient userClient;
+    private  FilmClient filmClient;
 
     @Autowired
-    private  FilmClient filmClient;
+    private  UserClient userClient;
+
 
 
     @Operation(summary = "创建交易")
