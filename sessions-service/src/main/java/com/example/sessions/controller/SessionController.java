@@ -11,6 +11,7 @@ import com.example.sessions.service.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class SessionController {
     private final SessionService sessionService;
 
+    @Autowired
     private FilmClient filmClient;
 
     private final HallService hallService;

@@ -16,8 +16,8 @@ import java.util.List;
 @FeignClient("film-service")
 public interface FilmClient {
 
-    @GetMapping("/api/films/findById?filmId={filmId}")
-    Result<Film> getFilmList(@PathVariable String filmId);
+//    @GetMapping("/api/films/findById")
+//    Result<Film> getFilmList(@RequestParam("filmId")  String filmId);
 
     @GetMapping("/api/films/getFilmByName")
     List<Film> getFilmByName(@RequestParam("filmName") String filmName);

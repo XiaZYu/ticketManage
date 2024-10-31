@@ -93,13 +93,19 @@ public class TradeController {
                 tradeDetailList.addAll(tradeService.getTradeList(uid, films.get(0).getFilmId(), hallId, current, pageSize));
             }else{
                 for (Film film : films){
+                    System.out.println(film.getFilmId());
                     tradeDetailList.addAll(tradeService.getTradeList(uid, film.getFilmId(), hallId, current, pageSize));
+                }
+                if (tradeDetailList.isEmpty()){
+                    return Result.error("没有找到相关的电影");
                 }
             }
         }
+
         if (tradeDetailList.isEmpty()){
             tradeDetailList.addAll(tradeService.getTradeList(uid, filmId, hallId, current, pageSize));
         }
+
         tradeList.setSize(pageSize);
         tradeList.setPage(current);
         tradeList.setCount(tradeService.countTrade());
