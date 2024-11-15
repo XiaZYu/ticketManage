@@ -12,11 +12,11 @@
         <module name="pay-service" />
         <module name="sessions-service" />
         <module name="trade-service" />
+        <module name="ticket-api-local" />
         <module name="user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ticket-api-local" target="17" />
       <module name="ticket-common" target="17" />
       <module name="ticket-redis" target="17" />
     </bytecodeTargetLevel>

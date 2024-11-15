@@ -1,5 +1,6 @@
 package com.example.trade.domain.vo;
 
+import com.example.trade.domain.dto.TradeDto;
 import lombok.Data;
 
 import java.util.List;
@@ -9,5 +10,5 @@ public class TradeList {
     private Integer count;
     private Integer page;
     private Integer size;
-    private List<TradeDetail> list;
+    private List<TradeDto> list;
 }

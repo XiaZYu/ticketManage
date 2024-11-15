@@ -3,6 +3,7 @@ package com.example.user.controller;
 
 import com.example.api.utils.UserContext;
 import com.example.user.config.JwtProperties;
+import com.example.user.domain.vo.ChangePsd;
 import com.example.user.domain.vo.LoginUser;
 import com.example.user.domain.vo.Result;
 import com.example.user.domain.po.User;
@@ -10,6 +11,7 @@ import com.example.user.domain.vo.UserList;
 import com.example.user.service.UserService;
 import com.example.user.utils.RedisUtils;
 import com.example.user.utils.JwtUtils;
+import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,26 +37,31 @@ public class UserController {
     @Operation(summary = "查询用户信息")
     @GetMapping("/list")
     public Result<UserList> getUserList(
-            @RequestParam(required = false)@Param("phone") Long phone,
-            @RequestParam(required = false)@Param("nickname") String nickname,
-            @RequestParam(required = false)@Param("name") String name,
-            @RequestParam(required = false, defaultValue = "1")@Param("current") int current,
-            @RequestParam(required = false, defaultValue = "10")@Param("pageSize") int pageSize) {
+            @RequestParam(required = false) @Param("phone") Long phone,
+            @RequestParam(required = false) @Param("nickname") String nickname,
+            @RequestParam(required = false) @Param("name") String name,
+            @RequestParam(required = false, defaultValue = "1") @Param("current") int current,
+            @RequestParam(required = false, defaultValue = "10") @Param("pageSize") int pageSize) {
         UserList userList = new UserList();
         List<User> user;
         userList.setSize(pageSize);
         userList.setPage(current);
-        userList.setCount(userService.countUser());
 
 //        String userListByR = redisUtil.get(phone + nickname + name + current + pageSize);
 //        if (userListByR != null){
 //            user = JSON.parseObject(userListByR,new TypeReference<List<User>>(){});
 //        }else{
-            user = userService.findUser(phone, nickname, name, current, pageSize);
+        user = userService.findUser(phone, nickname, name, current, pageSize);
 //            System.out.println("mysql" + user);
 //            String json = JSON.toJSONString(user);
 //            redisUtil.set(phone + nickname + name + current + pageSize, json);
 //        }
+        if (phone != null || (nickname != null && !nickname.isEmpty()) || (name != null && !name.isEmpty())){
+            userList.setCount(user.size());
+        }else{
+            userList.setCount(userService.countUser());
+
+        }
         userList.setList(user);
 
         return Result.success(userList);
@@ -83,6 +90,7 @@ public class UserController {
         }
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         user.setUid(UUID.randomUUID().toString());
+
         if (userService.addUser(user) == 1) {
             return Result.success("新增用户成功");
         }
@@ -163,15 +171,15 @@ public class UserController {
 
     @Operation(summary = "修改密码")
     @PutMapping("/changePassword")
-    public Result<String> changePassword(
-            @RequestParam String oldPassword,
-            @RequestParam String newPassword) {
+    public Result<String> changePassword(@RequestBody ChangePsd changePsd) {
         User user = userService.findUserById(UserContext.getUserInfo());
+        String oldPassword = changePsd.getOldPassword();
+        String newPassword = changePsd.getNewPassword();
         System.out.println(user);
         if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
             return Result.error("旧密码错误");
         }
-        if (oldPassword.equals(newPassword)){
+        if (oldPassword.equals(newPassword)) {
             return Result.error("新密码不能与旧密码相同");
         }
         user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
@@ -193,6 +201,41 @@ public class UserController {
     public Result<User> getUserByPhone(@RequestParam Long phone) {
         User user = userService.findUserByPhone(phone);
         return Result.success(user);
+    }
+
+    @Operation(summary = "扣款")
+    @PostMapping("/reduceBalance")
+    @GlobalTransactional(rollbackFor = Exception.class)
+    public Result<String> reduceBalance(
+            @RequestParam(required = false) String uid,
+            @RequestParam Double price) {
+        if (uid.isEmpty()) {
+            uid = UserContext.getUserInfo();
+        }
+        User user = userService.findUserInfoByUid(uid);
+        if (user.getBalance() < price) {
+            return Result.error("余额不足");
+        }
+        user.setBalance(user.getBalance() - price);
+        if (userService.updateBalance(user.getUid(), user.getBalance()) == 1) {
+            return Result.success("扣款成功");
+        }
+        return Result.error("扣款失败");
+    }
+
+    @Operation(summary = "充值")
+    @PostMapping("/addBalance")
+    public Result<String> addBalance(@RequestParam(required = false) String uid,
+                                     @RequestParam() Double price) throws Exception {
+        if (uid.isEmpty()) {
+            uid = UserContext.getUserInfo();
+        }
+        User user = userService.findUserInfoByUid(uid);
+        user.setBalance(user.getBalance() + price);
+        if (userService.updateBalance(user.getUid(), user.getBalance()) == 1) {
+            return Result.success("充值成功");
+        }
+        return Result.error("充值失败");
     }
 }
 

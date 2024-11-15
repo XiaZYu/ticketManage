@@ -45,8 +45,8 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public int addSeatMap(String hallId, String seatJson) {
-        return hallMapper.addSeatMap(hallId, seatJson);
+    public int editSeatMap(String hallId, String seatJsonId, Integer seats) {
+        return hallMapper.editSeatMap(hallId, seatJsonId, seats);
     }
 
     @Override

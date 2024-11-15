@@ -14,7 +14,7 @@ public interface UserMapper {
 
     //分页查询
     @Select("SELECT uid, nickname, name, gender, age," +
-            " phone, email, role FROM user " +
+            " phone, email, balance ,role FROM user " +
             "limit #{current}, #{pageSize}")
     List<User> getUserList(int current, int pageSize);
 
@@ -37,7 +37,7 @@ public interface UserMapper {
     User findUserByName(String name);
 
     //根据用户id查询用户信息
-    @Select("SELECT  uid, nickname, name, gender, age, phone, email, role FROM user WHERE uid = #{uid}")
+    @Select("SELECT  uid, nickname, name, gender, age, phone, email, balance, role FROM user WHERE uid = #{uid}")
     User findUserInfoByUid(String uid);
 
     //根据用户昵称查询用户信息
@@ -54,4 +54,7 @@ public interface UserMapper {
 
     @Select("SELECT * FROM user WHERE uid = #{id}")
     User findUserById(String id);
+
+    @Update("UPDATE user SET balance = #{balance} WHERE uid = #{uid}")
+    int updateBalance(String uid, double balance);
 }

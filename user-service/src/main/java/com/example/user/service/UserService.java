@@ -27,4 +27,6 @@ public interface UserService{
     void deleteUser(String uid); // 删除或注销用户
 
     User findUserById(String id); // 根据用户id查询用户信息
+
+    int updateBalance(String uid, double balance);
 }

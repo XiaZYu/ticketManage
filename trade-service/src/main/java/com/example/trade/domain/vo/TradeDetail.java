@@ -2,6 +2,8 @@ package com.example.trade.domain.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class TradeDetail {
     private String tradeId;
@@ -14,19 +16,17 @@ public class TradeDetail {
 
     private String sessionId;
 
-    private String seat;
-
     private String filmName;
+
+    private String time;
 
     private String posters;
 
     private String hallName;
 
-    private String sRow;
+    private String seat;
 
-    private String sColumn;
-
-    private String attr;
+    private List<SeatList> seatList;
 
     private String name;
 

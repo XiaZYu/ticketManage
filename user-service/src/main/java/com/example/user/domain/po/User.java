@@ -35,4 +35,6 @@ public class User implements Serializable {
     private String email;
 
     private String role;
+
+    private double balance;
 }

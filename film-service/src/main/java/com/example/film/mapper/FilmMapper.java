@@ -33,4 +33,7 @@ public interface FilmMapper {
 
     @Select("SELECT film_name FROM film")
     List<String> getFilmForName();
+
+    @Select("SELECT * FROM film WHERE film_id = #{id}")
+    Film getFilmById(String id);
 }

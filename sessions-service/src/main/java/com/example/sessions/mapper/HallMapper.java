@@ -16,19 +16,19 @@ public interface HallMapper {
     @Select("SELECT * from hall WHERE hall_id = #{hallId}")
     Hall getHallById(String hallId);
 
-    @Insert("insert into hall(hall_id, seats, hall_name, hall_desc, seat_json) " +
-            "values(#{hallId}, #{seats}, #{hallName}, #{hallDesc}, #{seatJson})")
+    @Insert("insert into hall(hall_id, hall_name, hall_desc) " +
+            "values(#{hallId}, #{hallName}, #{hallDesc})")
     int addHall(Hall hall);
 
-    @Insert("update hall set seats = #{seats}, hall_name = #{hallName}, hall_desc = #{hallDesc} " +
+    @Update("update hall set hall_name = #{hallName}, hall_desc = #{hallDesc} " +
             "where hall_id = #{hallId}")
     int updateHall(Hall hall);
 
     @Delete("delete from hall where hall_id = #{hallId}")
     void deleteHall(String hallId);
 
-    @Update("update hall set seat_json = #{seatJson} where hall_id = #{hallId}")
-    int addSeatMap(String hallId, String seatJson);
+    @Update("update hall set seat_json_id = #{seatJsonId}, seats = #{seats} where hall_id = #{hallId}")
+    int editSeatMap(String hallId, String seatJsonId, int seats);
 
     @Select("SELECT hall_name FROM hall")
     List<String> getHallForName();

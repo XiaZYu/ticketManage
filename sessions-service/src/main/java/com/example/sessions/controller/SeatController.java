@@ -1,19 +1,16 @@
 package com.example.sessions.controller;
 
-import com.example.sessions.domain.po.Hall;
 import com.example.sessions.domain.po.Seat;
-import com.example.sessions.domain.vo.Result;
-import com.example.sessions.domain.vo.SeatsList;
-import com.example.sessions.service.HallService;
+import com.example.sessions.domain.vo.*;
 import com.example.sessions.service.SeatService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Tag(name = "座位相关接口")
 @RestController
@@ -23,81 +20,62 @@ public class SeatController {
 
     private final SeatService seatService;
 
-    private final HallService hallService;
 
     @Operation(summary = "添加座位")
     @PostMapping("/add")
-    public Result<String> add(@RequestBody List<Seat> seat) {
-        int result = 0;
-        Hall hall = hallService.getHallById(seat.get(0).getHallId());
-
-        if (hall == null) {
-            return Result.error("不存在该影厅");
-        }
-        if (hall.getSeats() < seat.size()) {
-            return Result.error("该影厅剩余座位不足");
-        }
-
-        for (Seat value : seat) {
-            if (value.getAttr().isEmpty()){
-                value.setAttr("普通座位");
+    public Result<String> add(@RequestBody String seatJson) {
+        Seat seat = new Seat();
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            SeatJsonDetail[] seatJsonDetails = objectMapper.readValue(seatJson, SeatJsonDetail[].class);
+            for (SeatJsonDetail seatJsonDetail : seatJsonDetails) {
+                for (int i = 1; i <= seatJsonDetail.getSeats().size(); i++) {
+                    seat.setSeatJsonId(seatJsonDetail.getId());
+                    seat.setSeatId(seatJsonDetail.getSeats().get(i - 1).getId());
+                    seat.setSRow(seatJsonDetail.getSeats().get(i - 1).getRow());
+                    seat.setSColumn(seatJsonDetail.getSeats().get(i - 1).getCol());
+                    seat.setSeatType(seatJsonDetail.getSeats().get(i - 1).getSeatType());
+                    seat.setSeatType(seatJsonDetail.getSeats().get(i - 1).getSeatType());
+                    seat.setStatus(seatJsonDetail.getSeats().get(i - 1).getStatus());
+                    seatService.addSeat(seat);
+                }
             }
-
-            value.setSeatId(UUID.randomUUID().toString());
-            if (seatService.addSeat(value) == 1) {
-                result = 1;
-            } else {
-                result = 0;
-                break;
-            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-
-        if (result == 0) {
-            return Result.error("添加座位失败");
-        } else {
-            return Result.success("添加座位成功");
-        }
+        return Result.success("添加座位成功");
     }
 
-    @Operation(summary = "修改座位")
-    @PostMapping("/update")
-    public Result<String> update(@RequestBody Seat seat) {
-        Seat oldSeat = seatService.getSeatById(seat.getSeatId());
-        if(seat.getAttr() == null){
-            seat.setAttr(oldSeat.getAttr());
-        }
-
-        if (seatService.updateSeatStatus(seat) == 1) {
-            return Result.success("修改座位成功");
-        }
-        return Result.error("修改座位失败");
-    }
-
-    @Operation(summary = "查询座位")
-    @PostMapping("/list")
-    public Result<SeatsList> list(
-            @RequestParam String hallId,
-            @RequestParam(required = false, defaultValue = "1") int current,
-            @RequestParam(required = false, defaultValue = "10") int pageSize
+    @Operation(summary = "获取座位图id获取座位信息")
+    @GetMapping("/get")
+    public Result<String> getSeatJson(
+            @RequestParam String seatJsonId
     ) {
-        SeatsList seatsList = new SeatsList();
-        List<Seat> seats = seatService.getAvailableSeats(hallId, current, pageSize);
-        seatsList.setCount(seats.size());
-        seatsList.setList(seats);
-        seatsList.setSize(pageSize);
-        seatsList.setPage(current);
-        return Result.success(seatsList);
+        return Result.success(seatService.getSeatJsonById(seatJsonId));
     }
 
-    @Operation(summary = "获取场次座位信息")
-    @GetMapping("/sessionForSeat")
-    public Result<List<Seat>> getSessionForSeat(
-            @RequestParam(required = false) String sessionId,
-            @RequestParam String hallId
-    ) {
-        List<Seat> seats = seatService.getAllSeats(hallId);
-        System.out.println(seats);
+    @Operation(summary = "添加座位图")
+    @PostMapping("/addSeatJson")
+    public Result<String> addSeatJson(
+            @RequestBody String seatJson
+    ) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SeatJsonDetail[] seatJsonDetails = objectMapper.readValue(seatJson, SeatJsonDetail[].class);
+        String seatJsonId = "";
+        for (SeatJsonDetail seatJsonDetail : seatJsonDetails) {
+            seatJsonId = seatJsonDetail.getId();
+        }
+        if (!seatService.getSeatJsonById(seatJsonId).isEmpty()){
+            return Result.error("座位图已存在");
+        }
+        if (seatService.addSeatJson(seatJsonId, seatJson) == 1){
+            return Result.success("添加座位图成功");
+        }
+        return Result.error("添加座位图失败");
+    }
 
-        return Result.success(seats);
+    @GetMapping("/getSeatById")
+    Seat getSeatById(@RequestParam("seatId") String seatId){
+        return seatService.getSeatById(seatId);
     }
 }

@@ -17,4 +17,8 @@ public interface SeatService {
     int addSeat(Seat seat);
 
     List<Seat> getAllSeats(String hallId);
+
+    String getSeatJsonById(String seatJsonId);
+
+    int addSeatJson(String seatJsonId, String seatJson);
 }

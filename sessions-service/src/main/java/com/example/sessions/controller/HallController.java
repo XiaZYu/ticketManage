@@ -3,7 +3,11 @@ package com.example.sessions.controller;
 import com.example.sessions.domain.po.Hall;
 import com.example.sessions.domain.vo.HallList;
 import com.example.sessions.domain.vo.Result;
+import com.example.sessions.domain.vo.SeatJsonDetail;
 import com.example.sessions.service.HallService;
+import com.example.sessions.service.SeatService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HallController {
     private final HallService hallService;
+
+    private final SeatService seatService;
+
+    private final SeatController seatController;
 
     @Operation(summary = "创建影厅")
     @PostMapping("/createHall")
@@ -59,15 +67,30 @@ public class HallController {
         List<Hall> halls = hallService.queryHalls(hallName, hallDesc, current, pageSize);
         hallList.setPage(current);
         hallList.setSize(pageSize);
-        hallList.setCount(hallService.getHallsCount());
+        if ((hallName != null && !hallName.isEmpty()) || (hallDesc != null && !hallDesc.isEmpty())){
+            hallList.setCount(halls.size());
+        }else {
+            hallList.setCount(hallService.getHallsCount());
+        }
         hallList.setList(halls);
         return Result.success(hallList);
     }
 
-    @Operation(summary = "添加座位图")
-    @PostMapping("/addSeatMap")
-    public Result<String> addSeatMap(@RequestParam String hallId, @RequestParam String seatJson) {
-        if (hallService.addSeatMap(hallId, seatJson) == 1) {
+    @Operation(summary = "编辑座位图")
+    @PostMapping("/editSeatMap")
+    public Result<String> editSeatMap(
+            @RequestParam("hallId") String hallId,
+            @RequestParam("seats") Integer seats,
+            @RequestBody String seatJson) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SeatJsonDetail[] seatJsonDetails = objectMapper.readValue(seatJson, SeatJsonDetail[].class);
+        String seatJsonId = "";
+        for (SeatJsonDetail seatJsonDetail : seatJsonDetails) {
+            seatJsonId = seatJsonDetail.getId();
+        }
+        seatService.addSeatJson(seatJsonId, seatJson);
+        seatController.add(seatJson);
+        if (hallService.editSeatMap(hallId, seatJsonId, seats) == 1) {
             return Result.success("添加成功");
         }
         return Result.error("添加失败");

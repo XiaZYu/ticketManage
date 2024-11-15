@@ -16,13 +16,13 @@ public class Seat implements Serializable {
 
     private String seatId;
 
-    private String hallId;
+    private String seatJsonId;
 
     private Integer sRow;
 
     private Integer sColumn;
 
-    private String attr;
+    private String seatType;
 
     private String status;
 }

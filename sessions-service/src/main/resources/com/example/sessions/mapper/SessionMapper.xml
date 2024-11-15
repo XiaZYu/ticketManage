@@ -10,15 +10,37 @@
         <result property="hallId" column="hall_id"/>
         <result property="hallName" column="hall_name"/>
         <result property="time" column="time"/>
+        <result property="seatJson" column="seat_json"/>
     </resultMap>
     <select id="getSessionsByFilmId" resultMap="sessionResultMap">
-        SELECT s.* , f.film_id, f.film_name, h.hall_id, h.hall_name
+        SELECT MAX(s.session_id) as session_id, MAX(s.film_id) as film_id, MAX(s.hall_id) as hall_id, MAX(s.time) as time, MAX(s.seat_json) as seat_json, MAX(f.film_id) as film_id, MAX(f.film_name) as film_name, MAX(h.hall_id) as hall_id, MAX(h.hall_name) as hall_name
         FROM session s
         JOIN film f ON s.film_id = f.film_id
         JOIN hall h ON s.hall_id = h.hall_id
         <where>
             <if test="filmId != null">
                 s.film_id like concat('%', #{filmId}, '%')
+                and
+            </if>
+            <if test="time != null">
+                s.time like concat(#{time}, '%')
+            </if>
+        </where>
+        Group by s.time
+        order by s.time
+    </select>
+    <select id="getSessions" resultMap="sessionResultMap">
+        SELECT s.*, f.film_id, f.film_name, h.hall_id, h.hall_name
+        FROM session s
+        JOIN film f ON s.film_id = f.film_id
+        JOIN hall h ON s.hall_id = h.hall_id
+        <where>
+            <if test="filmId != null">
+                s.film_id like concat('%', #{filmId}, '%')
+                and
+            </if>
+            <if test="time != null">
+                s.time like concat(#{time}, '%')
             </if>
         </where>
         order by s.time

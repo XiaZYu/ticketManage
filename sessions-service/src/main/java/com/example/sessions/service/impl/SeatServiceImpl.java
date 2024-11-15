@@ -43,4 +43,14 @@ public class SeatServiceImpl implements SeatService {
     public List<Seat> getAllSeats(String hallId) {
         return seatMapper.getAllSeats(hallId);
     }
+
+    @Override
+    public String getSeatJsonById(String seatJsonId) {
+        return seatMapper.getSeatJsonById(seatJsonId);
+    }
+
+    @Override
+    public int addSeatJson(String seatJsonId, String seatJson) {
+        return seatMapper.addSeatJson(seatJsonId, seatJson);
+    }
 }

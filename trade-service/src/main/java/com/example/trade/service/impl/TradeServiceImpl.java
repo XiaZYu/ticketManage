@@ -41,4 +41,14 @@ public class TradeServiceImpl implements TradeService {
         int size = (current - 1) * pageSize;
         return tradeMapper.getMyTradeList(uid, size, pageSize);
     }
+
+    @Override
+    public int updateTradeStatus(String tradeId, String status) {
+        return tradeMapper.updateTradeStatus(tradeId, status);
+    }
+
+    @Override
+    public Trade getTrade(String tradeId) {
+        return tradeMapper.getTrade(tradeId);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.sessions.service.impl;
 
+import com.example.sessions.domain.po.Session;
 import com.example.sessions.domain.vo.SessionDetail;
 import com.example.sessions.mapper.SessionMapper;
 import com.example.sessions.service.SessionService;
@@ -15,9 +16,8 @@ public class SessionServiceImpl implements SessionService {
     private final SessionMapper sessionMapper;
 
     @Override
-    public List<SessionDetail> getSessionsByFilmId(String filmId, int current, int pageSize) {
-         current = ( current - 1) * pageSize;
-        return sessionMapper.getSessionsByFilmId(filmId, current, pageSize);
+    public List<SessionDetail> getSessionsByFilmId(String filmId, String time) {
+        return sessionMapper.getSessionsByFilmId(filmId, time);
     }
 
     @Override
@@ -48,5 +48,21 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public String getHallById(String hallId) {
         return sessionMapper.getHallById(hallId);
+    }
+
+    @Override
+    public Session getSeatMap(String sessionId) {
+        return sessionMapper.getSeatMap(sessionId);
+    }
+
+    @Override
+    public List<SessionDetail> getSessions(String filmId, String time, Integer current, Integer pageSize) {
+        current = (current - 1) * pageSize;
+        return sessionMapper.getSessions(filmId, time, current, pageSize);
+    }
+
+    @Override
+    public int updateSeatJson(String sessionId, String seatJson) {
+        return sessionMapper.updateSeatJson(sessionId, seatJson);
     }
 }

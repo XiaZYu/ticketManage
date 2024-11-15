@@ -28,7 +28,11 @@ public class FilmController {
             @RequestParam(required = false, defaultValue = "10") int pageSize) {
         FilmList filmList = new FilmList();
         List<Film> film = filmService.getFilmList(filmName, filmType, current, pageSize);
-        filmList.setCount(filmService.countFilm());
+        if ((filmName != null && !filmName.isEmpty()) || (filmType != null && !filmType.isEmpty())){
+            filmList.setCount(film.size());
+        }else{
+            filmList.setCount(filmService.countFilm());
+        }
         filmList.setPage(current);
         filmList.setSize(pageSize);
         filmList.setList(film);
@@ -62,6 +66,16 @@ public class FilmController {
             return Result.error("更新失败");
         }
         return Result.success("更新成功");
+    }
+
+    @Operation(summary = "获取电影详情")
+    @GetMapping("/getFilmById")
+    public Result<Film> getFilmById(@RequestParam String id) {
+        Film film = filmService.getFilmById(id);
+        if (film == null) {
+            return Result.error("电影不存在");
+        }
+        return Result.success(film);
     }
 
     @GetMapping("/getFilmByName")

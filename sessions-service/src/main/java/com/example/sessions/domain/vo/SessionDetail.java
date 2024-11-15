@@ -15,4 +15,6 @@ public class SessionDetail {
     private String hallName;
 
     private String time;
+
+    private String seatJson;
 }

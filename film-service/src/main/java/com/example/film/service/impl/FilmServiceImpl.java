@@ -56,4 +56,9 @@ public class FilmServiceImpl implements FilmService {
     public List<String> getFilmForName() {
         return filmMapper.getFilmForName();
     }
+
+    @Override
+    public Film getFilmById(String id) {
+        return filmMapper.getFilmById(id);
+    }
 }

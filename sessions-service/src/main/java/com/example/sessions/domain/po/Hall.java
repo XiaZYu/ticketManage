@@ -22,5 +22,5 @@ public class Hall implements Serializable {
 
     private String hallDesc;
 
-    private String seatJson;
+    private String seatJsonId;
 }

@@ -73,5 +73,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUserById(id);
     }
 
+    @Override
+    public int updateBalance(String uid, double balance) {
+        return userMapper.updateBalance(uid, balance);
+    }
+
 
 }

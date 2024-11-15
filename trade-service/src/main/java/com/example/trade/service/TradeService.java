@@ -16,4 +16,8 @@ public interface TradeService {
     int countTrade();
 
     List<TradeDetail> getMyTradeList(String uid, int current, int pageSize);
+
+    int updateTradeStatus(String tradeId, String status);
+
+    Trade getTrade(String tradeId);
 }

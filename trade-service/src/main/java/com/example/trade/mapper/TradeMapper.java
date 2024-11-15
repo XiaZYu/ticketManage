@@ -22,4 +22,10 @@ public interface TradeMapper {
     int countTrade();
 
     List<TradeDetail> getMyTradeList(@Param("uid") String uid, @Param("current") int current, @Param("pageSize") int pageSize);
+
+    @Update("UPDATE trade set status = #{status} WHERE trade_id = #{tradeId}")
+    int updateTradeStatus(@Param("tradeId") String tradeId, @Param("status") String status);
+
+    @Select("SELECT * FROM trade WHERE trade_id = #{tradeId}")
+    Trade getTrade(String tradeId);
 }

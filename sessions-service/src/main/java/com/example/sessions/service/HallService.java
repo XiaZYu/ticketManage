@@ -18,7 +18,7 @@ public interface HallService {
 
     void deleteHall(String hallId);
 
-    int addSeatMap(String hallId, String seatJson);
+    int editSeatMap(String hallId, String seatJsonId, Integer seats);
 
     List<String> getHallForName();
 }

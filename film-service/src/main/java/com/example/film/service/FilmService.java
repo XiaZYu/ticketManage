@@ -20,4 +20,6 @@ public interface FilmService {
     List<Film> getFilmByName(String filmName);
 
     List<String> getFilmForName();
+
+    Film getFilmById(String id);
 }

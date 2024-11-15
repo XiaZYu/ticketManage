@@ -10,23 +10,21 @@
         <result property="filmName" column="film_name"/>
         <result property="hallId" column="hall_id"/>
         <result property="sessionId" column="session_id"/>
-        <result property="seat" column="seat_id"/>
         <result property="posters" column="posters"/>
         <result property="hallName" column="hall_name"/>
-        <result property="sRow" column="s_row"/>
-        <result property="sColumn" column="s_column"/>
-        <result property="attr" column="attr"/>
+        <result property="seat" column="seat"/>
         <result property="name" column="name"/>
         <result property="phone" column="phone"/>
+        <result property="time" column="time"/>
         <result property="tradeDate" column="trade_date"/>
     </resultMap>
     <select id="getTradeList" resultMap="getTradeList">
-        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, s.seat_id, s.s_row , s.s_column, s.attr, u.uid, u.name, u.phone
+        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, u.uid, u.name, u.phone, s.session_id, s.time
         FROM trade t
         LEFT JOIN film f ON t.film_id = f.film_id
         LEFT JOIN hall h ON t.hall_id = h.hall_id
-        LEFT JOIN seat s ON t.seat = s.seat_id
         LEFT JOIN user u ON t.uid = u.uid
+        Left JOIN session s ON t.session_id = s.session_id
         <where>
             <if test="uid != null">
                 and
@@ -44,12 +42,12 @@
         limit #{current}, #{pageSize}
     </select>
     <select id="getMyTradeList" resultMap="getTradeList">
-        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, s.seat_id, s.s_row , s.s_column, s.attr, u.uid, u.name, u.phone
+        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, u.uid, u.name, u.phone, s.session_id, s.time
         FROM trade t
         LEFT JOIN film f ON t.film_id = f.film_id
         LEFT JOIN hall h ON t.hall_id = h.hall_id
-        LEFT JOIN seat s ON t.seat = s.seat_id
         LEFT JOIN user u ON t.uid = u.uid
+        Left JOIN session s ON t.session_id = s.session_id
         WHERE t.uid = #{uid}
         limit #{current}, #{pageSize}
     </select>
