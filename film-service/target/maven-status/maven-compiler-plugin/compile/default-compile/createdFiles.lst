@@ -1,0 +1,9 @@
+com\example\film\mapper\FilmMapper.class
+com\example\film\service\impl\FilmServiceImpl.class
+com\example\film\controller\FilmController.class
+com\example\film\config\Knife4jConfig.class
+com\example\film\domain\po\Film.class
+com\example\film\domain\vo\Result.class
+com\example\film\domain\vo\FilmList.class
+com\example\film\service\FilmService.class
+com\example\film\FilmApplication.class

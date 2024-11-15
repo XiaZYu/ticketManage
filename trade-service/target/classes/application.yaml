@@ -1,0 +1,64 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: trade-service
+  cloud:
+    nacos:
+      serverAddr: 127.0.0.1:8848
+      discovery:
+        namespace: ticket
+  datasource:
+    url: jdbc:mysql://localhost:3306/ticketdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ticketdb
+    password: 123456
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+  global-config:
+    db-config:
+      update-strategy: not_null
+      id-type: auto
+logging:
+  level:
+    com.example: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
+  file:
+    path: "logs/${spring.application.name}"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html #Swagger-doc的路径
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs        #json数据获取路径
+  group-configs:
+    - group: 'trade-service'
+      paths-to-match: '/**'
+      packages-to-scan: com.example.trade.controller
+# knife4j的增强配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+feign:
+  okhttp:
+    enabled: true # 开启OKHttp功能
+
+seata:
+  enabled: true
+  application-id: ccxi-abc
+  tx-service-group: ccxi_tx_group
+  service:
+    vgroup-mapping:
+      ccxi_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: ticket
+      group: DEFAULT_GROUP
+      application: seata-server

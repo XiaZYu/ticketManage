@@ -1,0 +1,12 @@
+com\example\trade\domain\vo\TradeList.class
+com\example\trade\TradeApplication.class
+com\example\trade\domain\po\Trade.class
+com\example\trade\service\impl\TradeServiceImpl.class
+com\example\trade\config\Knife4jConfig.class
+com\example\trade\domain\vo\TradeDetail.class
+com\example\trade\controller\TradeController.class
+com\example\trade\domain\vo\SeatList.class
+com\example\trade\domain\dto\TradeDto.class
+com\example\trade\mapper\TradeMapper.class
+com\example\trade\domain\vo\Result.class
+com\example\trade\service\TradeService.class

@@ -1,0 +1,14 @@
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\User.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\config\MvcConfig.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\Result.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\config\DefaultFeignConfig.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\client\UserClient.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\Seat.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\Film.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\client\FilmClient.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\client\SessionClient.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\Trade.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\client\TradeClient.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\inteceptor\UserInfoInterceptor.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\po\Hall.java
+E:\ticketManage\ticket-api-local\src\main\java\com\example\api\utils\UserContext.java

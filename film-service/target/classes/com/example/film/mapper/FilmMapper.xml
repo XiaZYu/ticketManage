@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.film.mapper.FilmMapper">
+    <select id="getFilmList" resultType="com.example.film.domain.po.Film">
+        SELECT * FROM film
+        <where>
+            <if test="filmName != null">
+                film_name like concat('%', #{filmName}, '%')
+            </if>
+            <if test="filmType != null">
+                and
+                film_type like concat('%', #{filmType}, '%')
+            </if>
+        </where>
+        limit #{current}, #{pageSize}
+    </select>
+</mapper>

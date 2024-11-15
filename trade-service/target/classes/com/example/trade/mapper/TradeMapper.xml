@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.trade.mapper.TradeMapper">
+    <resultMap id="getTradeList" type="com.example.trade.domain.vo.TradeDetail">
+        <id property="tradeId" column="trade_id"/>
+        <result property="filmId" column="film_id"/>
+        <result property="uid" column="uid"/>
+        <result property="filmName" column="film_name"/>
+        <result property="hallId" column="hall_id"/>
+        <result property="sessionId" column="session_id"/>
+        <result property="posters" column="posters"/>
+        <result property="hallName" column="hall_name"/>
+        <result property="seat" column="seat"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="time" column="time"/>
+        <result property="tradeDate" column="trade_date"/>
+    </resultMap>
+    <select id="getTradeList" resultMap="getTradeList">
+        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, u.uid, u.name, u.phone, s.session_id, s.time
+        FROM trade t
+        LEFT JOIN film f ON t.film_id = f.film_id
+        LEFT JOIN hall h ON t.hall_id = h.hall_id
+        LEFT JOIN user u ON t.uid = u.uid
+        Left JOIN session s ON t.session_id = s.session_id
+        <where>
+            <if test="uid != null">
+                and
+                t.uid = #{uid}
+            </if>
+            <if test="filmId != null">
+                and
+                t.film_id = #{filmId}
+            </if>
+            <if test="hallId != null">
+                and
+                t.hall_Id = #{hallId}
+            </if>
+        </where>
+        limit #{current}, #{pageSize}
+    </select>
+    <select id="getMyTradeList" resultMap="getTradeList">
+        SELECT t.*, f.film_id, f.film_name, f.posters, h.hall_id, h.hall_name, u.uid, u.name, u.phone, s.session_id, s.time
+        FROM trade t
+        LEFT JOIN film f ON t.film_id = f.film_id
+        LEFT JOIN hall h ON t.hall_id = h.hall_id
+        LEFT JOIN user u ON t.uid = u.uid
+        Left JOIN session s ON t.session_id = s.session_id
+        WHERE t.uid = #{uid}
+        limit #{current}, #{pageSize}
+    </select>
+</mapper>

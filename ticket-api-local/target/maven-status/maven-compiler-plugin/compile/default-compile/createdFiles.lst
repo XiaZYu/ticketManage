@@ -1,0 +1,15 @@
+com\example\api\po\Film.class
+com\example\api\utils\UserContext.class
+com\example\api\client\UserClient.class
+com\example\api\client\SessionClient.class
+com\example\api\config\DefaultFeignConfig$1.class
+com\example\api\config\MvcConfig.class
+com\example\api\client\TradeClient.class
+com\example\api\inteceptor\UserInfoInterceptor.class
+com\example\api\po\User.class
+com\example\api\config\DefaultFeignConfig.class
+com\example\api\po\Trade.class
+com\example\api\po\Hall.class
+com\example\api\po\Result.class
+com\example\api\po\Seat.class
+com\example\api\client\FilmClient.class

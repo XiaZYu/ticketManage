@@ -1,0 +1,12 @@
+E:\ticketManage\trade-service\src\main\java\com\example\trade\mapper\TradeMapper.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\config\Knife4jConfig.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\po\Trade.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\vo\Result.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\vo\TradeDetail.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\dto\TradeDto.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\controller\TradeController.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\service\impl\TradeServiceImpl.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\vo\TradeList.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\service\TradeService.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\TradeApplication.java
+E:\ticketManage\trade-service\src\main\java\com\example\trade\domain\vo\SeatList.java
