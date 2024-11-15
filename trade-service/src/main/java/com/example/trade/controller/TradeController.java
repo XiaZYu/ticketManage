@@ -21,10 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,17 +51,11 @@ public class TradeController {
 
         //设置uid
         trade.setUid(getInfo(userClient.getCurrentUser().getData().toString(), "uid=(.*?),"));
-
-        //更改座位状态
-//        Seat seat = new Seat();
-//        seat.setHallId(trade.getHallId());
-//        seat.setSeatId(trade.getSeat());
-//        switch (trade.getStatus()) {
-//            case "已支付" -> seat.setStatus(1);
-//            case "已取消" -> seat.setStatus(0);
-//            case "未支付" -> seat.setStatus(2);
-//        }
-//        sessionClient.updateSeats(seat);
+        List<String> seatIds = new ArrayList<>();
+        seatIds.addAll(Arrays.asList(trade.getSeat().split("//")));
+        if (sessionClient.updateSeatJson(trade.getSessionId(), seatIds).getCode() == 200) {
+            System.out.println("更新座位信息成功");
+        }
 
         if (tradeService.addTrade(trade) == 1) {
             return Result.success("创建成功");
